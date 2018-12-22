@@ -103,6 +103,7 @@ public class DrillInformation {
 	}
 
 	public void setInfoText(String infoText) {
-		this.infoTextRows = new String[] {infoText};
+		String splitToken = "\n";
+		this.infoTextRows = infoText.split(splitToken);
 	}	
 }
