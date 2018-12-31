@@ -27,7 +27,6 @@ public class Controller {
     	
     	DrillInformation drillInfo = queryDrillInformation(x,y);
     	
-        //return DrillInformation.getForLocation(0, 0);
     	return drillInfo;
     }
     
@@ -65,6 +64,9 @@ public class Controller {
     }
     
     private void assertResultIsSingleRow(List<DrillInformation> resultList) {
-    
+    	if(resultList == null || resultList.size() != 1) {
+    		throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, 
+    				"Query result did not map to exactly one object of type DrillInformation");
+    	}
     }
 }

@@ -4,12 +4,11 @@ import java.sql.Driver;
 
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
-import org.springframework.web.server.ResponseStatusException;
 
 
 @Configuration
@@ -34,6 +33,8 @@ public class EwsDataSource {
 	
     @Bean
     public DataSource postgresDataSource() {
+    	assertConfigPresent();    	
+    	
     	SimpleDriverDataSource dataSource = new SimpleDriverDataSource();    	
     	
     	String driverClassName = "org.postgresql.Driver";
@@ -51,5 +52,19 @@ public class EwsDataSource {
         dataSource.setPassword(password);
  
         return dataSource;
+    }
+    
+    private void assertConfigPresent() {
+    	if(Strings.isEmpty(url)) {
+    		throw new RuntimeException("Configuration Error: Database connection url is not configured");
+    	}
+    	
+    	if(Strings.isEmpty(userName)) {
+    		throw new RuntimeException("Configuration Error: Database userName is not configured");
+    	}
+    	
+    	if(Strings.isEmpty(password)) {
+    		throw new RuntimeException("Configuration Error: Database password is not configured");
+    	}
     }
 }

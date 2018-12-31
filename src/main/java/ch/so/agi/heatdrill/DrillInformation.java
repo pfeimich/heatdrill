@@ -15,24 +15,6 @@ public class DrillInformation {
 	private String[] infoTextRows;
 	
 	public DrillInformation() {} //required for bean
-	
-	public static DrillInformation getForLocation(int x, int y) {
-		DrillInformation di = new DrillInformation();
-		di.requestId = 9999;
-		di.permitted = true;
-		
-		di.depth = 99; 	
-		
-		di.gwsZone = null;				
-		di.gwPresent = true;				
-		di.spring = false;
-		di.gwRoom = null;
-		di.wasteSite = true;
-		
-		di.infoTextRows = new String[]{"Erste Zeile","Zweite Zeile",null,"Vierte Zeile"};
-		
-		return di;
-	}
 
 	public Integer getRequestId() {
 		return requestId;
