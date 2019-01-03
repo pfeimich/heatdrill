@@ -16,7 +16,7 @@ Beispiel:
 http://localhost/service?x=2600000&y=1200000  
 ```
 
-### Antwort Erfolg
+### Antwort bei Erfolg
 Bei erfolgreicher Durchführung wir mit HTTP Status-Code 200 die wie folgt strukturierte JSON-Antwort zurückgegeben:
 ```json
 {
@@ -39,7 +39,7 @@ Erläuterung der Rückgabewerte im JSON:
 * gwsZone, gwPresent, spring, gwRoom, wasteSite: Boolean, optional. Geben an, welche für den Bohrentscheid wichtigen Untergrundeigenschaften an der Bohrstelle zutreffen.
 * infoTextRows: Array von Strings, optional. Erläuternder Text zum Bohrentscheid. Jede Zelle des Arrays entspricht einer Zeile des erläuternden Textes.
 
-### Antwort Fehler
+### Antwort bei Fehler
 Bei einem Fehler wird ein nicht 200 HTTP-Status-Code zurückgegeben. HTTP Body: Generische HTML-Seite mit der Fehlermeldung
 
 ## Betriebs-Dokumentation
