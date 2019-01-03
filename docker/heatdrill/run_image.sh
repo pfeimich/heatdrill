@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SPRING_APPLICATION_JSON="{\"db-connection\":{\"url\": \"jdbc:postgresql://192.168.178.32:5432/dev\",\"userName\": \"ddluser\",\"password\": \"ddluser\"}}"
+export SPRING_APPLICATION_JSON="{\"db-connection\":{\"url\": \"jdbc:postgresql://10.36.54.208:5432/dev\",\"userName\": \"ddluser\",\"password\": \"ddluser\"}}"
 
 docker run -it \
     --name heatdrill \

@@ -52,11 +52,12 @@ public class Controller {
 	    			"	resultat_gwraum AS gwRoom,\n" + 
 	    			"	resultat_altlast AS wasteSite,\n" + 
 	    			"	text AS infoText\n" + 
-	    			"FROM entscheidung.entscheidung_detail(2603108,1234853);";    	
+	    			"FROM entscheidung.entscheidung_detail(?,?);";    	
     	
-    	RowMapper<DrillInformation> mapper = new BeanPropertyRowMapper<DrillInformation>(DrillInformation.class);
+    	RowMapper<DrillInformation> mapper = new BeanPropertyRowMapper<DrillInformation>(DrillInformation.class);    	
+    	Integer[] params = new Integer[] {x, y};
     	
-    	List<DrillInformation> resultList = jdbcTemplate.query(query,  mapper);
+    	List<DrillInformation> resultList = jdbcTemplate.query(query, params, mapper);
     	
     	assertResultIsSingleRow(resultList);
     	

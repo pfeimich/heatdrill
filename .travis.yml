@@ -12,7 +12,7 @@ branches:
 install: true
 
 script:
-  - gradle -DTRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER :ccc-service:build :serviceImage:build
+  - ./gradlew -DTRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER :tagLatest
 
 deploy:
   - provider: script
