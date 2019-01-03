@@ -1,3 +1,5 @@
+/docker/build_heatdrill/tmp/
+
 .gradle
 /gradle/
 /build/
