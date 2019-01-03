@@ -1,10 +1,8 @@
-/docker/build_heatdrill/tmp/
+/docker/heatdrill/tmp/
 
 .gradle
-/gradle/
 /build/
 /bin/
-!gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
 .apt_generated
