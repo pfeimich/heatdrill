@@ -31,7 +31,7 @@ dependencies {
 
 task copyDrillJar(type: Copy, dependsOn: build){
     from file("$buildDir/libs/heatdrill.jar")
-    into file("$projectDir/docker/build_heatdrill/tmp")
+    into file("$projectDir/docker/heatdrill/tmp")
 }
 
 task buildImage(type:Exec, dependsOn: copyDrillJar) {
@@ -40,7 +40,7 @@ task buildImage(type:Exec, dependsOn: copyDrillJar) {
 	def build_timestamp = getTimestamp()
 
 
- 	workingDir "$projectDir/docker/build_heatdrill"
+ 	workingDir "$projectDir/docker/heatdrill"
  	commandLine 'docker', 'build',
 				'--no-cache', '--force-rm',
 				'-t', "sogis/heatdrill:$buildident",
