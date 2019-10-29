@@ -50,7 +50,8 @@ public class Controller {
 	    			"	resultat_gw_vorkommen AS gwPresent,\n" + 
 	    			"	resultat_quelle AS spring,\n" + 
 	    			"	resultat_gwraum AS gwRoom,\n" + 
-	    			"	resultat_altlast AS wasteSite,\n" + 
+	    			"	resultat_altlast AS wasteSite,\n" +
+	    			"	resultat_rutsch AS landslide,\n" + 
 	    			"	text AS infoText\n" + 
 	    			"FROM entscheidung.entscheidung_detail(?,?);";    	
     	

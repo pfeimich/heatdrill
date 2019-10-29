@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
+	compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.springframework.boot:spring-boot-starter-data-jdbc')
 }
@@ -68,8 +69,6 @@ def getTimestamp() {
     def date = new Date()
     return date.format('yyyy-MM-dd HH:mm:ss')
 }
-
-//goon: Find out what files / commands needed for compose up --> build dir structure accordingly
 
 
 

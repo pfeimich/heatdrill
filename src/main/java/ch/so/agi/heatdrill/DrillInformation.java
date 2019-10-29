@@ -11,6 +11,7 @@ public class DrillInformation {
 	private Boolean spring;
 	private Boolean gwRoom;
 	private Boolean wasteSite;
+	private Boolean landslide;
 	
 	private String[] infoTextRows;
 	
@@ -88,4 +89,12 @@ public class DrillInformation {
 		String splitToken = "\n";
 		this.infoTextRows = infoText.split(splitToken);
 	}	
+	
+	public Boolean getLandslide() {
+		return landslide;
+	}
+
+	public void setLandslide(Boolean landslide) {
+		this.landslide = landslide;
+	}
 }
