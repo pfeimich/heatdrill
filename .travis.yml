@@ -12,11 +12,9 @@ branches:
 install: true
 
 script:
-  - ./gradlew -DTRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER :tagLatest
-
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; docker push sogis/heatdrill:latest
-    on:
-      branch: master
+  - ./gradlew -DTRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER :tagImage
+     
+after_success:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker push sogis/heatdrill:latest
+  - docker push sogis/heatdrill:$TRAVIS_BUILD_NUMBER 
