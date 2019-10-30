@@ -66,14 +66,26 @@ task buildImage(type:Exec, dependsOn: copyDrillJar) {
 				'-f', 'Dockerfile',  '.'
 }
 
-
-
-task tagLatest(type:Exec, dependsOn: buildImage) {
+task tagImage(type:Exec, dependsOn: buildImage) {
 	def buildident = System.getProperty('TRAVIS_BUILD_NUMBER','localbuild')
 	
  	commandLine 'docker', 'tag', 
 				"sogis/heatdrill:$buildident",
 				"sogis/heatdrill:latest"
+}
+
+task stopContainer(type:Exec) {
+ 	commandLine 'docker', 'rm', '-f', 'heatdrill'
+ 	ignoreExitValue true
+}
+
+task runImage(type:Exec){
+ 	workingDir "$projectDir/docker/heatdrill"
+ 	commandLine './run_image.sh', 'bg'
+ 	
+ 	dependsOn stopContainer
+ 	dependsOn tagImage
+ 	dependsOn startDb
 }
 
 def getCheckedOutGitCommitHash() {
