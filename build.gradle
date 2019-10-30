@@ -30,6 +30,21 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-jdbc')
 }
 
+task buildDbImage(type:Exec) {
+ 	workingDir "$projectDir/docker/mock_db/build_image"
+ 	commandLine './build_image.sh'
+}
+
+task stopDb(type:Exec) {
+ 	commandLine 'docker', 'rm', '-f', 'pgdev_ews'
+ 	ignoreExitValue true
+}
+
+task startDb(type:Exec, dependsOn:stopDb) {
+ 	workingDir "$projectDir/docker/mock_db"
+ 	commandLine './run_image.sh', 'bg'
+}
+
 task copyDrillJar(type: Copy, dependsOn: build){
     from file("$buildDir/libs/heatdrill.jar")
     into file("$projectDir/docker/heatdrill/tmp")

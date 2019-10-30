@@ -9,5 +9,5 @@ echo "=========================================================="
 docker build \
     --no-cache \
     --force-rm \
-    -t pgdev \
+    -t pgdev_ews \
     .

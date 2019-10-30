@@ -1,5 +1,4 @@
-FROM mdillon/postgis:9.6-alpine
+FROM postgres:9.6
 
-ENV POSTGRES_DB dev
+COPY mockdb_setup.sql /docker-entrypoint-initdb.d/
 
-COPY init-test-db.sh /docker-entrypoint-initdb.d/

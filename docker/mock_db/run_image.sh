@@ -1,8 +1,3 @@
-# Shell zum Starten der Mock-Datenbank zur Entwicklung des
-# Nadelstich REST-Service.
-# Erstellt in [Arbeitsverzeichnis]/pgdata die persistenten
-# Datenbankdateien der Mock-DB.
-
 #!/bin/bash
 
 echo "=========================================================="
@@ -11,11 +6,19 @@ echo "Uses the following Docker image:"
 echo "https://hub.docker.com/r/mdillon/postgis"
 echo "=========================================================="
 
-docker run -it \
+if [ "$1" == "bg" ] #bg - background
+  then
+    PARA="-d"
+  else
+    PARA=""
+fi
+
+docker run $PARA  \
     --name pgdev_ews \
-    -e POSTGRES_PASSWORD=admin1234 \
-    -e PGDATA=/var/lib/postgresql/data/pgdata \
+	-e POSTGRES_PASSWORD=postgres \
     -p 5432:5432 \
-    -v $(pwd)/pgdata:/var/lib/postgresql/data/pgdata \
     --rm \
-    pgdev
+    pgdev_ews
+	
+	
+#Connect to db with username postgres (default) and password postgres (password is set by POSTGRES_PASSWORD)
