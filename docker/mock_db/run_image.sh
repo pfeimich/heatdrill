@@ -14,11 +14,11 @@ if [ "$1" == "bg" ] #bg - background
 fi
 
 docker run $PARA  \
-    --name pgdev_ews \
+  --name sogis/heatdrill_mockdb \
 	-e POSTGRES_PASSWORD=postgres \
     -p 5432:5432 \
     --rm \
-    pgdev_ews
+    sogis/heatdrill_mockdb
 	
 	
 #Connect to db with username postgres (default) and password postgres (password is set by POSTGRES_PASSWORD)

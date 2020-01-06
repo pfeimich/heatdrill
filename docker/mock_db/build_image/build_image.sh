@@ -9,5 +9,5 @@ echo "=========================================================="
 docker build \
     --no-cache \
     --force-rm \
-    -t pgdev_ews \
+    -t sogis/heatdrill_mockdb \
     .
