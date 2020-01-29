@@ -13,11 +13,11 @@ x und y sind die ganzzahligen Punktkoordinaten im Koordinatensystem EPSG:2056.
 ### Aufruf
 Stelle mit EWS erlaubt (Stand Oktober 2019)
 ```http
-http://localhost/service?x=2637503&y=1245807  
+http://localhost:8080/service?x=2637503&y=1245807  
 ```
 Ausserhalb Bounding-Box:
 ```http
-http://localhost/service?x=2600000&y=1200000  
+http://localhost:8080/service?x=2600000&y=1200000  
 ```
 
 ### Antwort bei Erfolg
