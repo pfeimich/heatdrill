@@ -52,26 +52,20 @@ task copyDrillJar(type: Copy, dependsOn: build){
 
 task buildImage(type:Exec, dependsOn: copyDrillJar) {
 	def githash = getCheckedOutGitCommitHash()
-	def buildident = System.getProperty('TRAVIS_BUILD_NUMBER','localbuild')
 	def build_timestamp = getTimestamp()
-
+	def version = getVersion(true)
+  def shortVersion = getVersion(false)
 
  	workingDir "$projectDir/docker/heatdrill"
  	commandLine 'docker', 'build',
 				'--no-cache', '--force-rm',
-				'-t', "sogis/heatdrill:$buildident",
+				'-t', "sogis/heatdrill:$version",
+				'-t', "sogis/heatdrill:$shortVersion",
+				'-t', "sogis/heatdrill:latest",
 				'--label', "heatdrill.created=$build_timestamp", 
 				'--label', "heatdrill.git_commit=$githash",
-				'--label', "heatdrill.travis_build=$buildident",
+        '--label', "heatdrill.version=$version",
 				'-f', 'Dockerfile',  '.'
-}
-
-task tagImage(type:Exec, dependsOn: buildImage) {
-	def buildident = System.getProperty('TRAVIS_BUILD_NUMBER','localbuild')
-	
- 	commandLine 'docker', 'tag', 
-				"sogis/heatdrill:$buildident",
-				"sogis/heatdrill:latest"
 }
 
 task stopContainer(type:Exec) {
@@ -84,8 +78,12 @@ task runImage(type:Exec){
  	commandLine './run_image.sh', 'bg'
  	
  	dependsOn stopContainer
- 	dependsOn tagImage
+ 	dependsOn buildImage
  	dependsOn startDb
+}
+
+task pushImage(type:Exec) {
+    commandLine 'docker', 'image', 'push', '--all-tags', "sogis/heatdrill"
 }
 
 def getCheckedOutGitCommitHash() {
@@ -95,6 +93,24 @@ def getCheckedOutGitCommitHash() {
 def getTimestamp() {
     def date = new Date()
     return date.format('yyyy-MM-dd HH:mm:ss')
+}
+
+String getVersion(boolean useFullVersion){
+    String version = "1.0"   
+
+    if(useFullVersion)
+        version = version + "." + getBuildNumber()
+
+    return version
+}
+
+String getBuildNumber() {
+    String val = System.getenv('GITHUB_RUN_NUMBER')
+
+    if(val == null)
+        val = 'localbuild'
+
+    return val
 }
 
 

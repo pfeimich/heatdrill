@@ -14,7 +14,7 @@ if [ "$1" == "bg" ] #bg - background
 fi
 
 docker run $PARA  \
-  --name sogis/heatdrill_mockdb \
+  --name sogis_heatdrill_mockdb \
 	-e POSTGRES_PASSWORD=postgres \
     -p 5432:5432 \
     --rm \
